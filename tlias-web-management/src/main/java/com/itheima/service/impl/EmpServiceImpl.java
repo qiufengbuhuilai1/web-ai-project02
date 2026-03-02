@@ -15,6 +15,7 @@ import org.springframework.util.CollectionUtils;
 
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -84,5 +85,34 @@ public class EmpServiceImpl implements EmpService {
         }
 
 
+    }
+
+    @Transactional(rollbackFor = {Exception.class})
+    @Override
+    public void delete(List<Integer> ids) {
+        empMapper.deleteByIds(ids);
+        empExprMapper.deleteByEmpIds(ids);
+    }
+
+    @Override
+    public Emp getInfo(Integer id) {
+        return empMapper.getById(id);
+    }
+
+    @Transactional(rollbackFor = {Exception.class})
+    @Override
+    public void update(Emp emp) {
+        emp.setUpdateTime(LocalDateTime.now());
+        empMapper.updateById(emp);
+
+        empExprMapper.deleteByEmpIds(Arrays.asList(emp.getId()));
+
+        List<EmpExpr> exprList=emp.getExprList();
+        if(!CollectionUtils.isEmpty(exprList)){
+            exprList.forEach(expr->{
+                expr.setEmpId(emp.getId());
+            });
+            empExprMapper.insertBatch(exprList);
+        }
     }
 }

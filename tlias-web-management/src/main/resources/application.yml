@@ -6,6 +6,11 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: root
+  servlet:
+    multipart:
+      max-file-size: 100MB    # 单个文件最大大小（根据需求调整，如10MB、50MB）
+      max-request-size: 200MB # 单次请求总文件大小上限
+      enabled: true           # 确保文件上传功能开启
 
 mybatis:
   configuration:
@@ -18,4 +23,9 @@ logging:
   level:
     org.springframework.jdbc.support.JdbcTransactionManager: debug
 
-
+#阿里云OSS
+aliyun:
+  oss:
+    endpoint: https://oss-cn-beijing.aliyuncs.com
+    bucketName: qiufengbuhuilai
+    region: cn-beijing
