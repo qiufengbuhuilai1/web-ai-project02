@@ -2,10 +2,7 @@ package com.itheima.mapper;
 
 import com.itheima.pojo.Emp;
 import com.itheima.pojo.EmpQueryParam;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.MapKey;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.*;
 
 
 import java.util.List;
@@ -41,4 +38,12 @@ public interface EmpMapper {
 
     @MapKey("name")
     List<Map<String, Object>> countEmpGenderData();
+
+    List<Emp> listAll();
+
+    @Select("select count(*) from emp where dept_id=#{id}")
+    Integer getempCountByDeptId(Integer id);
+
+    @Select("select * from emp where username=#{username} and password=#{password}")
+    Emp selectByUsernameAndPassword(Emp emp);
 }

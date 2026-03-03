@@ -25,4 +25,10 @@ public class GlobalExceptionHandler {
         String msg="用户名【"+arr[2]+"】已存在";
         return Result.error(msg);
     }
+
+    @ExceptionHandler
+    public Result handleBusinessException(BusinessException ex) {
+        log.error("异常信息：{对不起, 该班级下有学生, 不能直接删除}");
+        return Result.error("对不起, 该班级下有学生, 不能直接删除");
+    }
 }

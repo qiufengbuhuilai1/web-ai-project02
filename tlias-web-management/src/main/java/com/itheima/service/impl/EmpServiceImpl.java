@@ -115,4 +115,25 @@ public class EmpServiceImpl implements EmpService {
             empExprMapper.insertBatch(exprList);
         }
     }
+
+    @Override
+    public List<Emp> listAll() {
+        return empMapper.listAll();
+    }
+
+    @Override
+    public Integer getempCountByDeptId(Integer id) {
+        return empMapper.getempCountByDeptId(id);
+    }
+
+    @Override
+    public LoginInfo login(Emp emp) {
+        //1.根据用户名查询员工数据
+        Emp e=empMapper.selectByUsernameAndPassword(emp);
+        if(e==null) return null;
+
+        LoginInfo loginInfo=new LoginInfo(e.getId(),e.getUsername(),e.getName(),"");
+        log.info("登录成功{}",loginInfo);
+        return loginInfo;
+    }
 }

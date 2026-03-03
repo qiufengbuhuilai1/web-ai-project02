@@ -2,6 +2,7 @@ package com.itheima.service;
 
 import com.itheima.pojo.Emp;
 import com.itheima.pojo.EmpQueryParam;
+import com.itheima.pojo.LoginInfo;
 import com.itheima.pojo.PageResult;
 
 
@@ -20,4 +21,10 @@ public interface EmpService {
     Emp getInfo(Integer id);
 
     void update(Emp emp);
+
+    List<Emp> listAll();
+
+    Integer getempCountByDeptId(Integer id);
+
+    LoginInfo login(Emp emp);
 }

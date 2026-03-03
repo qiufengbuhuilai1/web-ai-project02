@@ -100,5 +100,8 @@
             count(*) value
         from emp group by gender;
     </select>
+    <select id="listAll" resultType="com.itheima.pojo.Emp">
+        select * from emp;
+    </select>
 
 </mapper>

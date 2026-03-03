@@ -1,14 +1,16 @@
 package com.itheima.controller;
 
+import com.itheima.exception.BusinessException;
+
 import com.itheima.pojo.Dept;
 import com.itheima.pojo.Result;
 import com.itheima.service.DeptService;
-import jakarta.servlet.http.HttpServletRequest;
+import com.itheima.service.EmpService;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -18,6 +20,9 @@ public class DeptController {
 
     @Autowired
     private DeptService deptService;
+
+    @Autowired
+    private EmpService empService;
 
 //    @RequestMapping(value = "/depts",method = RequestMethod.GET)
     @GetMapping
@@ -50,6 +55,12 @@ public class DeptController {
     public Result delete(Integer id) {
         System.out.println("删除部门数据，id：" + id);
         log.info("删除部门数据，id：{}",id);
+
+        //查询班级中是否有学生
+        if(empService.getempCountByDeptId(id)>0){
+            throw new BusinessException("对不起, 该部门下有学生, 不能直接删除");
+        }
+
         deptService.deleteById(id);
         return Result.success();
     }
