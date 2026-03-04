@@ -7,6 +7,7 @@ import com.itheima.mapper.EmpMapper;
 import com.itheima.pojo.*;
 import com.itheima.service.EmpLogService;
 import com.itheima.service.EmpService;
+import com.itheima.utils.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,9 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -132,7 +135,12 @@ public class EmpServiceImpl implements EmpService {
         Emp e=empMapper.selectByUsernameAndPassword(emp);
         if(e==null) return null;
 
-        LoginInfo loginInfo=new LoginInfo(e.getId(),e.getUsername(),e.getName(),"");
+        Map<String, Object> claims=new HashMap<>();
+        claims.put("id",e.getId());
+        claims.put("username",e.getUsername());
+        String jwt = JwtUtils.generateJwt(claims);
+
+        LoginInfo loginInfo=new LoginInfo(e.getId(),e.getUsername(),e.getName(),jwt);
         log.info("登录成功{}",loginInfo);
         return loginInfo;
     }
