@@ -1,5 +1,6 @@
 package com.itheima.controller;
 
+import com.itheima.anno.Log;
 import com.itheima.exception.BusinessException;
 
 import com.itheima.pojo.Dept;
@@ -51,6 +52,7 @@ public class DeptController {
 //        return Result.success();
 //    }
 
+    @Log
     @DeleteMapping
     public Result delete(Integer id) {
         System.out.println("删除部门数据，id：" + id);
@@ -66,6 +68,7 @@ public class DeptController {
     }
 
 
+    @Log
     @PostMapping
     public Result add(@RequestBody Dept dept) {
         System.out.println("添加部门数据：" + dept);
@@ -87,6 +90,7 @@ public class DeptController {
         return Result.success(dept);
     }
 
+    @Log
     @PutMapping
     public Result update(@RequestBody Dept dept) {
         System.out.println("修改部门:"+dept);

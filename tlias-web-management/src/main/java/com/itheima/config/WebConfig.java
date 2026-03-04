@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * 配置类
  */
-@Configuration
+//@Configuration
 public class WebConfig implements WebMvcConfigurer {
 
 //    @Autowired

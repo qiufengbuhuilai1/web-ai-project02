@@ -1,6 +1,8 @@
 package com.itheima.interceptor;
 
+import com.itheima.utils.CurrentHolder;
 import com.itheima.utils.JwtUtils;
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +32,10 @@ public class TokenInterceptor implements HandlerInterceptor {
         }
         //验证token
         try {
-            JwtUtils.parseJWT(token);
+            Claims claims = JwtUtils.parseJWT(token);
+//            Integer empId = Integer.valueOf(claims.get("id").toString());
+//            CurrentHolder.setCurrentId(empId);
+//            log.info("当前用户id为：{}，存入",empId);
         } catch (Exception e) {
             log.info("令牌验证失败，响应401");
             response.setStatus(401);
