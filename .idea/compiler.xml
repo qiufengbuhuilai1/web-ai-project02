@@ -16,6 +16,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="springboot-aop-quickstart" />
+        <module name="tlias-utils" />
+        <module name="tlias-pojp" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="21" />
