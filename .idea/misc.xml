@@ -9,6 +9,7 @@
         <option value="$PROJECT_DIR$/springboot-aop-quickstart/pom.xml" />
         <option value="$PROJECT_DIR$/tlias-pojp/pom.xml" />
         <option value="$PROJECT_DIR$/tlias-utils/pom.xml" />
+        <option value="$PROJECT_DIR$/tlias-parent/pom.xml" />
       </list>
     </option>
   </component>
